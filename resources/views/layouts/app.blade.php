@@ -6,7 +6,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-
+        <script src="node_modules/gridstack/dist/gridstack-all.js"></script>
+        <link href="node_modules/gridstack/dist/gridstack.min.css" rel="stylesheet"/>
+        <style type="text/css">
+        .grid-stack-item-content { background-color: #16526E; color: white; padding: 10px;  }
+        </style>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

@@ -19,11 +19,6 @@ $logout = function (Logout $logout) {
                 <div class="shrink-0 flex items-center">
                     <a href="dashboard" class="text-xl text-white">Widgets</a>
                 </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <button class="text-white text-sm">Add widget +</button>
-                </div>
             </div>
 
             <!-- Settings Dropdown -->
