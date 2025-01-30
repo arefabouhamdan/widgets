@@ -30,10 +30,9 @@
                 JSON.stringify({
                     w: parseInt(e.target.dataset.w),
                     h: parseInt(e.target.dataset.h),
-                    content: e.target.textContent,
+                    content: e.target.children[0],
                 })
             );
-
             e.target.classList.add("dragging");
         });
 
