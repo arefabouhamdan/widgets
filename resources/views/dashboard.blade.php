@@ -17,7 +17,7 @@
             <form id="widgetSettingsForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium">Title</label>
-                    <input type="text" id="widgetTitle" class="mt-1 block w-full rounded border-gray-300">
+                    <input type="text" id="widgetTitle" class="mt-1 block w-full rounded border-gray-300"   >
                 </div>
                 <div>
                     <label class="block text-sm font-medium">Description</label>
@@ -104,14 +104,12 @@
         document.getElementById('widgetSettingsForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const config = {
+                ...JSON.parse(currentWidget.dataset.config),
                 title: document.getElementById('widgetTitle').value,
                 description: document.getElementById('widgetDescription').value,
                 color: document.getElementById('chartColor').value,
                 startDate: document.getElementById('startDate').value,
                 endDate: document.getElementById('endDate').value,
-                yMin: document.getElementById('yMin').value,
-                yMax: document.getElementById('yMax').value,
-                ...JSON.parse(currentWidget.dataset.config)
             };
 
             const titleEl = currentWidget.querySelector('.widget-title');
@@ -181,6 +179,9 @@
                     datasets: [{
                         label: '# of Votes',
                         data: [12, 19, 3, 5, 2, 50],
+                        backgroundColor: config.color || '#3B82F6',
+                        borderColor: config.color || '#3B82F6',
+                        borderWidth: 1
                     }]
                 },
                 options: {
@@ -189,52 +190,33 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            ticks: {
-                                stepSize: 10
-                            }
+                            ticks: { stepSize: 10 }
                         }
                     },
                     plugins: {
-                        legend: {
-                            position: 'top'
-                        }
+                        legend: { position: 'top' }
                     }
                 }
             };
         }
 
-        grid.load([
+        const initialWidgets = [
             { 
-                x: 0, y: 0, w: 6, h: 4,
-                content: `
-                    <div class="grid-stack-item-content relative h-full">
-                        <div class="absolute top-0 right-0 space-x-1 z-10">
-                            <button class="edit-btn bg-blue-500 text-white px-2 rounded hover:bg-blue-600">Edit</button>
-                            <button class="delete-btn bg-red-500 text-white px-2 rounded hover:bg-red-600">×</button>
-                        </div>
-                        <div class="p-4 h-full flex flex-col">
-                            <h3 class="widget-title font-bold mb-2">Sales Data</h3>
-                            <p class="widget-description text-sm text-gray-600 mb-4">Monthly sales performance</p>
-                            <div class="flex-1">
-                                <canvas></canvas>
-                            </div>
-                        </div>
-                    </div>
-                `
+                w: 6, 
+                h: 4,
+                config: {
+                    title: 'Sales Data',
+                    description: 'Monthly sales performance',
+                    color: '#3B82F6'
+                }
             },
-        ]);
+        ];
 
-        grid.engine.nodes.forEach(node => {
-            const widget = node.el;
-            const config = getChartConfig({ 
-                color: '#3B82F6',
-                title: widget.querySelector('.widget-title')?.textContent,
-                description: widget.querySelector('.widget-description')?.textContent
+        initialWidgets.forEach(data => {
+            createWidget({
+                ...data,
+                config: data.config
             });
-            const ctx = widget.querySelector('canvas');
-            widget.chart = new Chart(ctx, config);
-            widget.dataset.config = JSON.stringify(config);
-            setupWidgetControls(widget);
         });
 
         document.querySelectorAll('.sidebar-widget').forEach(widget => {
