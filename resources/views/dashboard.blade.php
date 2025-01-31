@@ -136,8 +136,8 @@
             const newWidget = document.createElement('div');
             newWidget.className = 'grid-stack-item p-4 rounded';
             newWidget.innerHTML = `
-                <div class="grid-stack-item-content relative h-full">
-                    <div class="absolute top-0 right-0 space-x-1 z-10">
+                <div class="grid-stack-item-content">
+                    <div class="absolute top-5 right-5 z-10">
                         <button class="edit-btn bg-blue-500 text-white px-2 rounded hover:bg-blue-600">Edit</button>
                         <button class="delete-btn bg-red-500 text-white px-2 rounded hover:bg-red-600">×</button>
                     </div>
