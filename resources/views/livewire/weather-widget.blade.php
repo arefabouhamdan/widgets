@@ -1,4 +1,4 @@
-<div class="sidebar-widget p-4 text-white w-80 m-1 rounded" draggable="true" data-w="4" data-h="2" style="background-color: #16526E;">
+<div class="sidebar-widget p-4 text-white w-80 m-1 rounded" draggable="true" data-w="6" data-h="4" style="background-color: #16526E;">
   <canvas id="myChart"></canvas>
 </div>
 
@@ -14,7 +14,6 @@
       datasets: [{
         label: '# of Votes',
         data: [12, 19, 3, 5, 2, 50],
-        borderWidth: 1
       }]
     },
     options: {
