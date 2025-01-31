@@ -24,6 +24,13 @@
                     <textarea id="widgetDescription" class="mt-1 block w-full rounded border-gray-300"></textarea>
                 </div>
                 <div>
+                    <label class="block text-sm font-medium">Chart Type</label>
+                    <select id="chartType" name="types" class="mt-1 block w-full rounded border-gray-300">
+                        <option value="bar">Bar</option>
+                        <option value="line">Line</option>
+                    </select>
+                </div>
+                <div>
                     <label class="block text-sm font-medium">Chart Color</label>
                     <input type="color" id="chartColor" class="mt-1 block w-full rounded">
                 </div>
@@ -90,6 +97,7 @@
                 
                 document.getElementById('widgetTitle').value = config.title || '';
                 document.getElementById('widgetDescription').value = config.description || '';
+                document.getElementById('chartType').value = config.type || 'bar';
                 document.getElementById('chartColor').value = config.color || '#3B82F6';
                 document.getElementById('startDate').value = config.startDate || '';
                 document.getElementById('endDate').value = config.endDate || '';
@@ -107,6 +115,7 @@
                 ...JSON.parse(currentWidget.dataset.config),
                 title: document.getElementById('widgetTitle').value,
                 description: document.getElementById('widgetDescription').value,
+                type: document.getElementById('chartType').value,
                 color: document.getElementById('chartColor').value,
                 startDate: document.getElementById('startDate').value,
                 endDate: document.getElementById('endDate').value,
@@ -173,7 +182,7 @@
 
         function getChartConfig(config) {
             return {
-                type: 'bar',
+                type: config.type || 'bar',
                 data: {
                     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                     datasets: [{
